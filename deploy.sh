@@ -35,5 +35,5 @@ docker run -d \
     nginx:latest
 
 # shpw running containers
-echo
-docker ps -a
+# echo
+# docker ps -a
