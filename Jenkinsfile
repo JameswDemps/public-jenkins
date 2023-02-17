@@ -1,9 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Stop/Remove'){
             steps {
-                echo "Hello World!"
+                sh 'docker stop myapp || true'
+                sh 'docker rm myapp || true'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'docker build -t myapp .'
+            }
+        }
+        stage('Deploy'){
+            steps {
+                sh 'docker run --rm -p 5000:5000 --name myapp -d myapp:latest'
             }
         }
     }
